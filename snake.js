@@ -36,3 +36,14 @@ Player can click the Play Again button to return to the Start screen after the g
 
 
 */
+
+let snake;
+let food;
+let direction;
+const startScreen = document.getElementById('startScreen');
+const startButton = document.getElementById('startButton');
+const playAgainButton = document.getElementById('playAgainButton');
+const canvas = document.getElementById('gameCanvas');
+const message = document.getElementById('message');
+const gameContainer = document.getElementById('gameContainer');
+
