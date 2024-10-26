@@ -47,3 +47,13 @@ const canvas = document.getElementById('gameCanvas');
 const message = document.getElementById('message');
 const gameContainer = document.getElementById('gameContainer');
 
+startButton.addEventListener('click', () => {
+    startScreen.style.display = 'none';
+    gameContainer.style.display = 'block';
+})
+
+playAgainButton.addEventListener('click', () => {
+    playAgainButton.style.display = 'none';
+    message.textContent = '';
+})
+
