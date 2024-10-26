@@ -50,10 +50,13 @@ const gameContainer = document.getElementById('gameContainer');
 startButton.addEventListener('click', () => {
     startScreen.style.display = 'none';
     gameContainer.style.display = 'block';
+    playAgainButton.style.display = 'block';
 })
 
 playAgainButton.addEventListener('click', () => {
     playAgainButton.style.display = 'none';
+    gameContainer.style.display = 'none';
+    startScreen.style.display = 'block';
     message.textContent = '';
 })
 
