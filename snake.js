@@ -40,12 +40,15 @@ Player can click the Play Again button to return to the Start screen after the g
 let snake;
 let food;
 let direction;
+let interval;
+let gameRunning;
 const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startButton');
 const playAgainButton = document.getElementById('playAgainButton');
 const canvas = document.getElementById('gameCanvas');
 const message = document.getElementById('message');
 const gameContainer = document.getElementById('gameContainer');
+const ctx = canvas.getContext('2d');
 
 startButton.addEventListener('click', () => {
     startScreen.style.display = 'none';
@@ -60,3 +63,25 @@ playAgainButton.addEventListener('click', () => {
     message.textContent = '';
 })
 
+function startGame() {
+    gameRunning = true;
+    snake = [{ x: 200, y: 200 }];
+    direction = { x: 20, y: 0 };
+    interval = setInterval(updateGame, 100);
+    food = {
+        x: Math.floor(Math.random() * (canvas.width / 20)) * 20,
+        y: Math.floor(Math.random() * (canvas.height / 20)) * 20
+    };
+};
+
+function genSnake() {
+    ctx.fillStyle = 'purple';
+    for (let segment of snake) {
+        ctx.fillRect(segment.x, segment.y, 20, 20);
+    };
+};
+
+function genFood() {
+    ctx.fillStyle = 'violet';
+    ctx.fillRect(food.x, food.y, 20, 20);
+};
