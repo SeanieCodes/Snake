@@ -54,6 +54,7 @@ startButton.addEventListener('click', () => {
     startScreen.style.display = 'none';
     gameContainer.style.display = 'flex';
     playAgainButton.style.display = 'block';
+    startGame();
 })
 
 playAgainButton.addEventListener('click', () => {
@@ -61,9 +62,11 @@ playAgainButton.addEventListener('click', () => {
     gameContainer.style.display = 'none';
     startScreen.style.display = 'flex';
     message.textContent = '';
+    gameRunning = false;
 })
 
 function startGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     gameRunning = true;
     snake = [{ x: 200, y: 200 }];
     direction = { x: 20, y: 0 };
@@ -72,6 +75,8 @@ function startGame() {
         x: Math.floor(Math.random() * (canvas.width / 20)) * 20,
         y: Math.floor(Math.random() * (canvas.height / 20)) * 20
     };
+    genSnake();
+    genFood();
 };
 
 function genSnake() {
@@ -84,4 +89,8 @@ function genSnake() {
 function genFood() {
     ctx.fillStyle = 'violet';
     ctx.fillRect(food.x, food.y, 20, 20);
+};
+
+function updateGame() {
+    
 };
