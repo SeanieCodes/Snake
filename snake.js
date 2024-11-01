@@ -66,6 +66,9 @@ playAgainButton.addEventListener('click', () => {
 })
 
 function startGame() {
+    if (interval) {
+        clearInterval(interval);  
+      };
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     gameRunning = true;
     snake = [{ x: 200, y: 200 }];
@@ -92,5 +95,9 @@ function genFood() {
 };
 
 function updateGame() {
-    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    snake[0].x += direction.x;
+    snake[0].y += direction.y;
+    genSnake();
+    genFood();
 };
