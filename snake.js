@@ -98,6 +98,8 @@ function updateGame() {
         snakeElement.style.gridColumnStart = segment.x + 1;
         gameBoard.appendChild(snakeElement);
     });
+    snake[0].x += direction.x;
+    snake[0].y += direction.y;
 };
 
 document.addEventListener('keydown', (event) => {
