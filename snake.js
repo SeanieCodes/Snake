@@ -61,8 +61,6 @@ playAgainButton.addEventListener('click', () => {
     playAgainButton.style.display = 'none';
     gameContainer.style.display = 'none';
     startScreen.style.display = 'flex';
-    message.textContent = '';
-    gameRunning = false;
 })
 
 function startGame() {
@@ -70,7 +68,6 @@ function startGame() {
         clearInterval(interval);  
       };
     gameBoard.innerHTML = '';
-    gameRunning = true;
     snake = [{ x: 10, y: 10 }];
     direction = { x: 1, y: 0 };
     interval = setInterval(updateGame, 100);
