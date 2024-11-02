@@ -87,7 +87,13 @@ function genFood() {
     foodElement.style.gridRowStart = food.y + 1;
     foodElement.style.gridColumnStart = food.x + 1;
     gameBoard.appendChild(foodElement);
-}
+    while (snake.some(segment => segment.x === food.x && segment.y === food.y)) {
+        food = {
+            x: Math.floor(Math.random() * gridSize),
+            y: Math.floor(Math.random() * gridSize)
+        };
+    };
+};
 
 function updateGame() {
     if (!gameRunning) return;
@@ -105,6 +111,7 @@ function updateGame() {
         gameOver();
         return;
     };
+
 };
 
 document.addEventListener('keydown', (event) => {
