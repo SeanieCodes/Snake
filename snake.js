@@ -100,6 +100,7 @@ function updateGame() {
     });
     snake[0].x += direction.x;
     snake[0].y += direction.y;
+    if (snake)
 };
 
 document.addEventListener('keydown', (event) => {
@@ -131,3 +132,8 @@ document.addEventListener('keydown', (event) => {
     };
 });
 
+function gameOver() {
+    message = 'Play Again!';
+    gameRunning = false;
+    clearInterval(interval);
+};
