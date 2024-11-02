@@ -82,6 +82,11 @@ function genFood() {
         x: Math.floor(Math.random() * gridSize),
         y: Math.floor(Math.random() * gridSize)
     };
+    const foodElement = document.createElement('div');
+    foodElement.classList.add('food');
+    foodElement.style.gridRowStart = food.y + 1;
+    foodElement.style.gridColumnStart = food.x + 1;
+    gameBoard.appendChild(foodElement);
 }
 
 function updateGame() {
