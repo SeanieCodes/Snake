@@ -109,7 +109,7 @@ function updateGame() {
         x: snake[0].x + direction.x,
         y: snake[0].y + direction.y
     };
-    if (newHead.x < 0 || newHead.x >= gridSize || newHead.y < 0 || newHead.y >= gridSize) {
+    if (newHead.x < 0 || newHead.x >= gridSize || newHead.y < 0 || newHead.y >= gridSize || snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)) {
         gameOver();
         return;
     };
