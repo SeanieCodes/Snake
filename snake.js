@@ -131,3 +131,5 @@ function updateGame() {
     genFood();
 };
 
+
+
