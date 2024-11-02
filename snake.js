@@ -46,7 +46,7 @@ const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startButton');
 const playAgainButton = document.getElementById('playAgainButton');
 const gameBoard = document.getElementById('gameBoard');
-let message = document.getElementById('message');
+const message = document.getElementById('message');
 const gameContainer = document.getElementById('gameContainer');
 const gridSize = 20;
 
