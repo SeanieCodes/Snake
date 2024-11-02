@@ -91,7 +91,13 @@ function genFood() {
 
 function updateGame() {
     gameBoard.innerHTML = '';
-    
+    snake.forEach(segment => {
+        const snakeElement = document.createElement('div');
+        snakeElement.classList.add('snake');
+        snakeElement.style.gridRowStart = segment.y + 1;
+        snakeElement.style.gridColumnStart = segment.x + 1;
+        gameBoard.appendChild(snakeElement);
+    });
 };
 
 document.addEventListener('keydown', (event) => {
