@@ -82,11 +82,6 @@ function genFood() {
         x: Math.floor(Math.random() * gridSize),
         y: Math.floor(Math.random() * gridSize)
     };
-    const foodElement = document.createElement('div');
-    foodElement.classList.add('food');
-    foodElement.style.gridRowStart = food.y + 1;
-    foodElement.style.gridColumnStart = food.x + 1;
-    gameBoard.appendChild(foodElement);
     while (snake.some(segment => segment.x === food.x && segment.y === food.y)) {
         food = {
             x: Math.floor(Math.random() * gridSize),
@@ -98,6 +93,11 @@ function genFood() {
 function updateGame() {
     if (!gameRunning) return;
     gameBoard.innerHTML = '';
+    const foodElement = document.createElement('div');
+    foodElement.classList.add('food');
+    foodElement.style.gridRowStart = food.y + 1;
+    foodElement.style.gridColumnStart = food.x + 1;
+    gameBoard.appendChild(foodElement);
     snake.forEach(segment => {
         const snakeElement = document.createElement('div');
         snakeElement.classList.add('snake');
@@ -105,13 +105,21 @@ function updateGame() {
         snakeElement.style.gridColumnStart = segment.x + 1;
         gameBoard.appendChild(snakeElement);
     });
-    snake[0].x += direction.x;
-    snake[0].y += direction.y;
-    if (snake[0].x < 0 || snake[0].x >= gridSize || snake[0].y < 0 || snake[0].y >= gridSize) {
+    const newHead = {
+        x: snake[0].x + direction.x,
+        y: snake[0].y + direction.y
+    };
+    if (newHead.x < 0 || newHead.x >= gridSize || newHead.y < 0 || newHead.y >= gridSize) {
         gameOver();
         return;
     };
 
+    snake.unshift(newHead);
+    if (newHead.x === food.x && newHead.y === food.y) {
+        genFood();
+    } else {
+        snake.pop();
+    };
 };
 
 document.addEventListener('keydown', (event) => {
