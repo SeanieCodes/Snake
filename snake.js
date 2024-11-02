@@ -46,7 +46,7 @@ const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startButton');
 const playAgainButton = document.getElementById('playAgainButton');
 const gameBoard = document.getElementById('gameBoard');
-const message = document.getElementById('message');
+let message = document.getElementById('message');
 const gameContainer = document.getElementById('gameContainer');
 const gridSize = 20;
 
@@ -90,6 +90,7 @@ function genFood() {
 }
 
 function updateGame() {
+    if (!gameRunning) return;
     gameBoard.innerHTML = '';
     snake.forEach(segment => {
         const snakeElement = document.createElement('div');
@@ -100,7 +101,10 @@ function updateGame() {
     });
     snake[0].x += direction.x;
     snake[0].y += direction.y;
-    if (snake)
+    if (snake[0].x < 0 || snake[0].x >= gridSize || snake[0].y < 0 || snake[0].y >= gridSize) {
+        gameOver();
+        return;
+    };
 };
 
 document.addEventListener('keydown', (event) => {
@@ -133,7 +137,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 function gameOver() {
-    message = 'Play Again!';
+    message.textContent = 'Play Again!';
     gameRunning = false;
     clearInterval(interval);
 };
