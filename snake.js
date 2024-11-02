@@ -45,10 +45,10 @@ let gameRunning;
 const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startButton');
 const playAgainButton = document.getElementById('playAgainButton');
-const canvas = document.getElementById('gameCanvas');
+const gameBoard = document.getElementById('gameBoard');
 const message = document.getElementById('message');
 const gameContainer = document.getElementById('gameContainer');
-const ctx = canvas.getContext('2d');
+const gridSize = 20;
 
 startButton.addEventListener('click', () => {
     startScreen.style.display = 'none';
@@ -65,71 +65,56 @@ playAgainButton.addEventListener('click', () => {
     gameRunning = false;
 })
 
+function startGame() {
+    if (interval) {
+        clearInterval(interval);  
+      };
+    gameBoard.innerHTML = '';
+    gameRunning = true;
+    snake = [{ x: 10, y: 10 }];
+    direction = { x: 1, y: 0 };
+    interval = setInterval(updateGame, 100);
+    genFood();
+};
+
+function genFood() {
+    food = {
+        x: Math.floor(Math.random() * gridSize),
+        y: Math.floor(Math.random() * gridSize)
+    };
+}
+
+function updateGame() {
+    gameBoard.innerHTML = '';
+    
+};
+
 document.addEventListener('keydown', (event) => {
     switch(event.key) {
         case 'ArrowUp':
             if (direction.y === 0) {
                 direction.x = 0;
-                direction.y = -20;
+                direction.y = -1;
                 };
             break;
         case 'ArrowDown':
             if (direction.y === 0) {
                 direction.x = 0;
-                direction.y = 20;
+                direction.y = 1;
                 };
             break;
         case 'ArrowLeft':
             if (direction.x === 0) {
-                direction.x = -20;
+                direction.x = -1;
                 direction.y = 0;
                 };
             break;
         case 'ArrowRight':
             if (direction.x === 0) {
-                direction.x = 20;
+                direction.x = 1;
                 direction.y = 0;
                 };
             break;
     };
 });
-
-function startGame() {
-    if (interval) {
-        clearInterval(interval);  
-      };
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    gameRunning = true;
-    snake = [{ x: 200, y: 200 }];
-    direction = { x: 20, y: 0 };
-    interval = setInterval(updateGame, 100);
-    food = {
-        x: Math.floor(Math.random() * (canvas.width / 20)) * 20,
-        y: Math.floor(Math.random() * (canvas.height / 20)) * 20
-    };
-    genSnake();
-    genFood();
-};
-
-function genSnake() {
-    ctx.fillStyle = 'purple';
-    for (let segment of snake) {
-        ctx.fillRect(segment.x, segment.y, 20, 20);
-    };
-};
-
-function genFood() {
-    ctx.fillStyle = 'violet';
-    ctx.fillRect(food.x, food.y, 20, 20);
-};
-
-function updateGame() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    snake[0].x += direction.x;
-    snake[0].y += direction.y;
-    genSnake();
-    genFood();
-};
-
-
 
