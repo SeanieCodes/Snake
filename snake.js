@@ -42,11 +42,13 @@ let food;
 let direction;
 let interval;
 let gameRunning;
+let score = 0;
 const startScreen = document.getElementById('startScreen');
 const startButton = document.getElementById('startButton');
 const playAgainButton = document.getElementById('playAgainButton');
 const gameBoard = document.getElementById('gameBoard');
 const message = document.getElementById('message');
+const scoreElement = document.getElementById('score');
 const gameContainer = document.getElementById('gameContainer');
 const gridSize = 20;
 
@@ -61,6 +63,10 @@ playAgainButton.addEventListener('click', () => {
     playAgainButton.style.display = 'none';
     gameContainer.style.display = 'none';
     startScreen.style.display = 'flex';
+    score = 0;
+    scoreElement.textContent = '';
+    message.textContent = '';
+    gameRunning = false;
 })
 
 function startGame() {
@@ -68,6 +74,7 @@ function startGame() {
         clearInterval(interval);  
       };
     gameBoard.innerHTML = '';
+    gameRunning = true;
     snake = [{ x: 10, y: 10 }];
     direction = { x: 1, y: 0 };
     interval = setInterval(updateGame, 100);
@@ -114,6 +121,8 @@ function updateGame() {
     snake.unshift(newHead);
     if (newHead.x === food.x && newHead.y === food.y) {
         genFood();
+        score++;
+        scoreElement.textContent = score;
     } else {
         snake.pop();
     };
