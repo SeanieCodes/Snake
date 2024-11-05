@@ -126,6 +126,10 @@ function updateGame() {
     } else {
         snake.pop();
     };
+    if (score === 10) {
+        gameWin();
+        return;
+    };
 };
 
 document.addEventListener('keydown', (event) => {
@@ -156,6 +160,12 @@ document.addEventListener('keydown', (event) => {
             break;
     };
 });
+
+function gameWin() {
+    message.textContent = 'YAY!';
+    gameRunning = false;
+    clearInterval(interval);
+};
 
 function gameOver() {
     message.textContent = 'Play Again!';
