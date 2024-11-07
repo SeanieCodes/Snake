@@ -44,6 +44,10 @@ let interval;
 let gameRunning;
 let score = 0;
 const startScreen = document.getElementById('startScreen');
+const levelScreen = document.getElementById('levelScreen');
+const button1 = document.getElementById('button1');
+const button2 = document.getElementById('button2');
+const button3 = document.getElementById('button3');
 const startButton = document.getElementById('startButton');
 const playAgainButton = document.getElementById('playAgainButton');
 const gameBoard = document.getElementById('gameBoard');
@@ -54,30 +58,76 @@ const gridSize = 20;
 
 startButton.addEventListener('click', () => {
     startScreen.style.display = 'none';
+    levelScreen.style.display = 'flex';
+});
+
+button1.addEventListener('click', () => {
+    levelScreen.style.display = 'none';
     gameContainer.style.display = 'flex';
     playAgainButton.style.display = 'block';
-    startGame();
-})
+    startGame1();
+});
+
+button2.addEventListener('click', () => {
+    levelScreen.style.display = 'none';
+    gameContainer.style.display = 'flex';
+    playAgainButton.style.display = 'block';
+    startGame2();
+});
+
+button3.addEventListener('click', () => {
+    levelScreen.style.display = 'none';
+    gameContainer.style.display = 'flex';
+    playAgainButton.style.display = 'block';
+    startGame3();
+});
 
 playAgainButton.addEventListener('click', () => {
     playAgainButton.style.display = 'none';
     gameContainer.style.display = 'none';
     startScreen.style.display = 'flex';
-    score = 0;
-    scoreElement.textContent = '';
     message.textContent = '';
+    scoreElement.textContent = '';
+    score = 0;
     gameRunning = false;
 })
 
-function startGame() {
+function startGame1() {
     if (interval) {
         clearInterval(interval);  
       };
+    
     gameBoard.innerHTML = '';
     gameRunning = true;
     snake = [{ x: 10, y: 10 }];
     direction = { x: 1, y: 0 };
     interval = setInterval(updateGame, 100);
+    genFood();
+};
+
+function startGame2() {
+    if (interval) {
+        clearInterval(interval);  
+      };
+    
+    gameBoard.innerHTML = '';
+    gameRunning = true;
+    snake = [{ x: 10, y: 10 }];
+    direction = { x: 1, y: 0 };
+    interval = setInterval(updateGame, 75);
+    genFood();
+};
+
+function startGame3() {
+    if (interval) {
+        clearInterval(interval);  
+      };
+    
+    gameBoard.innerHTML = '';
+    gameRunning = true;
+    snake = [{ x: 10, y: 10 }];
+    direction = { x: 1, y: 0 };
+    interval = setInterval(updateGame, 50);
     genFood();
 };
 
