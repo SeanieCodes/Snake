@@ -91,6 +91,47 @@ playAgainButton.addEventListener('click', () => {
     gameRunning = false;
 })
 
+document.addEventListener('keydown', (event) => {
+    switch(event.key) {
+        case 'ArrowUp':
+            if (direction.y === 0) {
+                direction.x = 0;
+                direction.y = -1;
+                };
+            break;
+        case 'ArrowDown':
+            if (direction.y === 0) {
+                direction.x = 0;
+                direction.y = 1;
+                };
+            break;
+        case 'ArrowLeft':
+            if (direction.x === 0) {
+                direction.x = -1;
+                direction.y = 0;
+                };
+            break;
+        case 'ArrowRight':
+            if (direction.x === 0) {
+                direction.x = 1;
+                direction.y = 0;
+                };
+            break;
+    };
+});
+
+function gameWin() {
+    message.textContent = 'YAY!';
+    gameRunning = false;
+    clearInterval(interval);
+};
+
+function gameOver() {
+    message.textContent = 'Play Again!';
+    gameRunning = false;
+    clearInterval(interval);
+};
+
 function genFood() {
     food = {
         x: Math.floor(Math.random() * gridSize),
@@ -230,45 +271,4 @@ function updateGame2() {
         gameWin();
         return;
     };
-};
-
-document.addEventListener('keydown', (event) => {
-    switch(event.key) {
-        case 'ArrowUp':
-            if (direction.y === 0) {
-                direction.x = 0;
-                direction.y = -1;
-                };
-            break;
-        case 'ArrowDown':
-            if (direction.y === 0) {
-                direction.x = 0;
-                direction.y = 1;
-                };
-            break;
-        case 'ArrowLeft':
-            if (direction.x === 0) {
-                direction.x = -1;
-                direction.y = 0;
-                };
-            break;
-        case 'ArrowRight':
-            if (direction.x === 0) {
-                direction.x = 1;
-                direction.y = 0;
-                };
-            break;
-    };
-});
-
-function gameWin() {
-    message.textContent = 'YAY!';
-    gameRunning = false;
-    clearInterval(interval);
-};
-
-function gameOver() {
-    message.textContent = 'Play Again!';
-    gameRunning = false;
-    clearInterval(interval);
 };
