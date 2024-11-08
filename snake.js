@@ -48,7 +48,6 @@ const startScreen = document.getElementById('startScreen');
 const levelScreen = document.getElementById('levelScreen');
 const button1 = document.getElementById('button1');
 const button2 = document.getElementById('button2');
-const button3 = document.getElementById('button3');
 const startButton = document.getElementById('startButton');
 const playAgainButton = document.getElementById('playAgainButton');
 const gameBoard = document.getElementById('gameBoard');
