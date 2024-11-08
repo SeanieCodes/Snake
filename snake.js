@@ -96,16 +96,12 @@ function gameOver1() {
 };
 
 function genFood1() {
-    food = {
-        x: Math.floor(Math.random() * gridSize),
-        y: Math.floor(Math.random() * gridSize)
-    };
-    while (snake.some(segment => segment.x === food.x && segment.y === food.y)) {
+    do {
         food = {
             x: Math.floor(Math.random() * gridSize),
-            y: Math.floor(Math.random() * gridSize)
+            y: Math.floor(Math.random() * gridSize),
         };
-    };
+    } while (snake.some(segment => segment.x === food.x && segment.y === food.y));
 };
 
 function startGame1() {
@@ -137,7 +133,7 @@ function updateGame1() {
     });
     const snakeHead = {
         x: snake[0].x + direction.x,
-        y: snake[0].y + direction.y
+        y: snake[0].y + direction.y,
     };
     if (snakeHead.x < 0 || snakeHead.x >= gridSize || snakeHead.y < 0 || snakeHead.y >= gridSize || snake.some(segment => segment.x === snakeHead.x && segment.y === snakeHead.y)) {
         gameOver1();
@@ -183,16 +179,13 @@ function genShit() {
 };
 
 function genFood2() {
-    food = {
-        x: Math.floor(Math.random() * gridSize),
-        y: Math.floor(Math.random() * gridSize)
-    };
-    while (snake.some(segment => segment.x === food.x && segment.y === food.y) || shits.some(shitty => shitty.x === food.x && shitty.y === food.y)) {
+    do {
         food = {
             x: Math.floor(Math.random() * gridSize),
-            y: Math.floor(Math.random() * gridSize)
+            y: Math.floor(Math.random() * gridSize),
         };
-    };
+    } while (snake.some(segment => segment.x === food.x && segment.y === food.y) || 
+            shits.some(shitty => shitty.x === food.x && shitty.y === food.y));
 };
 
 function startGame2() {
@@ -233,7 +226,7 @@ function updateGame2() {
     });
     const snakeHead = {
         x: snake[0].x + direction.x,
-        y: snake[0].y + direction.y
+        y: snake[0].y + direction.y,
     };
     if (
         snakeHead.x < 0 || snakeHead.x >= gridSize || 
