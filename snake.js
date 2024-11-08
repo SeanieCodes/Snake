@@ -39,7 +39,7 @@ Player can click the Play Again button to return to the Start screen after the g
 
 let snake;
 let food;
-let pixel;
+let pixels = [];
 let direction;
 let interval;
 let gameRunning;
@@ -83,6 +83,11 @@ playAgainButton.addEventListener('click', () => {
     message.textContent = '';
     scoreElement.textContent = '';
     score = 0;
+    pixels = [];
+    snake = [];
+    food = null;
+    direction = { x: 1, y: 0 };
+    clearInterval(interval);
     gameRunning = false;
 })
 
@@ -99,50 +104,16 @@ function genFood() {
     };
 };
 
-function genPixel() {
-    pixel = {
-        x: Math.floor(Math.random() * gridSize),
-        y: Math.floor(Math.random() * gridSize)
-    };
-    while (snake.some(segment => segment.x === pixel.x && segment.y === pixel.y)) {
-        pixel = {
-            x: Math.floor(Math.random() * gridSize),
-            y: Math.floor(Math.random() * gridSize)
-        };
-    };
-    while (food.x === pixel.x && food.y === pixel.y) {
-        pixel = {
-            x: Math.floor(Math.random() * gridSize),
-            y: Math.floor(Math.random() * gridSize)
-        };
-    };
-};
-
 function startGame1() {
     if (interval) {
         clearInterval(interval);  
       };
-    
     gameBoard.innerHTML = '';
     gameRunning = true;
     snake = [{ x: 10, y: 10 }];
     direction = { x: 1, y: 0 };
     interval = setInterval(updateGame1, 100);
     genFood();
-};
-
-function startGame2() {
-    if (interval) {
-        clearInterval(interval);  
-      };
-    
-    gameBoard.innerHTML = '';
-    gameRunning = true;
-    snake = [{ x: 10, y: 10 }];
-    direction = { x: 1, y: 0 };
-    interval = setInterval(updateGame2, 100);
-    genFood();
-    genPixel();
 };
 
 function updateGame1() {
@@ -183,6 +154,33 @@ function updateGame1() {
     };
 };
 
+function genPixel() {
+    let newPixel;
+    do {
+        newPixel = {
+            x: Math.floor(Math.random() * gridSize),
+            y: Math.floor(Math.random() * gridSize)
+        };
+    } while (snake.some(segment => segment.x === newPixel.x && segment.y === newPixel.y) || 
+             pixels.some(p => p.x === newPixel.x && p.y === newPixel.y) || 
+             (food.x === newPixel.x && food.y === newPixel.y));
+    pixels.push(newPixel);
+};
+
+function startGame2() {
+    if (interval) {
+        clearInterval(interval);  
+      };
+    
+    gameBoard.innerHTML = '';
+    gameRunning = true;
+    snake = [{ x: 10, y: 10 }];
+    direction = { x: 1, y: 0 };
+    interval = setInterval(updateGame2, 100);
+    genFood();
+    genPixel();
+};
+
 function updateGame2() {
     if (!gameRunning) return;
     gameBoard.innerHTML = '';
@@ -191,11 +189,13 @@ function updateGame2() {
     foodElement.style.gridRowStart = food.y + 1;
     foodElement.style.gridColumnStart = food.x + 1;
     gameBoard.appendChild(foodElement);
+    pixels.forEach(pixel => {
     const pixelElement = document.createElement('div');
     pixelElement.classList.add('pixel');
     pixelElement.style.gridRowStart = pixel.y + 1;
     pixelElement.style.gridColumnStart = pixel.x + 1;
     gameBoard.appendChild(pixelElement);
+    });
     snake.forEach(segment => {
         const snakeElement = document.createElement('div');
         snakeElement.classList.add('snake');
@@ -207,10 +207,15 @@ function updateGame2() {
         x: snake[0].x + direction.x,
         y: snake[0].y + direction.y
     };
-    if (newHead.x < 0 || newHead.x >= gridSize || newHead.y < 0 || newHead.y >= gridSize || (newHead.x === pixel.x && newHead.y === pixel.y) || snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)) {
+    if (
+        newHead.x < 0 || newHead.x >= gridSize || 
+        newHead.y < 0 || newHead.y >= gridSize || 
+        snake.some(segment => segment.x === newHead.x && segment.y === newHead.y) || 
+        pixels.some(p => p.x === newHead.x && p.y === newHead.y)  // Check pixel collision
+    ) {
         gameOver();
         return;
-    };
+    }
 
     snake.unshift(newHead);
     if (newHead.x === food.x && newHead.y === food.y) {
