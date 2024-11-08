@@ -195,16 +195,16 @@ function updateGame1() {
 };
 
 function genShit() {
-    let newShit;
+    let shit;
     do {
-        newShit = {
+        shit = {
             x: Math.floor(Math.random() * gridSize),
             y: Math.floor(Math.random() * gridSize)
         };
-    } while (snake.some(segment => segment.x === newShit.x && segment.y === newShit.y) || 
-             shits.some(p => p.x === newShit.x && p.y === newShit.y) || 
-             (food.x === newShit.x && food.y === newShit.y));
-    shits.push(newShit);
+    } while (snake.some(segment => segment.x === shit.x && segment.y === shit.y) || 
+             shits.some(p => p.x === shit.x && p.y === shit.y) || 
+             (food.x === shit.x && food.y === shit.y));
+    shits.push(shit);
 };
 
 function startGame2() {
