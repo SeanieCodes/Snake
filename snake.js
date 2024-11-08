@@ -88,25 +88,13 @@ function gameWin1() {
     clearInterval(interval);
 };
 
-function gameWin2() {
-    message2.textContent = 'YAY!';
-    gameRunning = false;
-    clearInterval(interval);
-};
-
 function gameOver1() {
     message1.textContent = 'Play Again!';
     gameRunning = false;
     clearInterval(interval);
 };
 
-function gameOver2() {
-    message2.textContent = 'SHIT!!!!!!!';
-    gameRunning = false;
-    clearInterval(interval);
-};
-
-function genFood() {
+function genFood1() {
     food = {
         x: Math.floor(Math.random() * gridSize),
         y: Math.floor(Math.random() * gridSize)
@@ -128,7 +116,7 @@ function startGame1() {
     snake = [{ x: 10, y: 10 }];
     direction = { x: 1, y: 0 };
     interval = setInterval(updateGame1, 100);
-    genFood();
+    genFood1();
 };
 
 function updateGame1() {
@@ -156,7 +144,7 @@ function updateGame1() {
     };
     snake.unshift(snakeHead);
     if (snakeHead.x === food.x && snakeHead.y === food.y) {
-        genFood();
+        genFood1();
         score++;
         scoreElement.textContent = score;
     } else {
@@ -166,6 +154,18 @@ function updateGame1() {
         gameWin1();
         return;
     };
+};
+
+function gameWin2() {
+    message2.textContent = 'ur the shit!!!';
+    gameRunning = false;
+    clearInterval(interval);
+};
+
+function gameOver2() {
+    message2.textContent = 'SHIT!!!!!!';
+    gameRunning = false;
+    clearInterval(interval);
 };
 
 function genShit() {
@@ -181,6 +181,19 @@ function genShit() {
     shits.push(shit);
 };
 
+function genFood2() {
+    food = {
+        x: Math.floor(Math.random() * gridSize),
+        y: Math.floor(Math.random() * gridSize)
+    };
+    while (snake.some(segment => segment.x === food.x && segment.y === food.y) || shits.some(shitty => shitty.x === food.x && shitty.y === food.y)) {
+        food = {
+            x: Math.floor(Math.random() * gridSize),
+            y: Math.floor(Math.random() * gridSize)
+        };
+    };
+};
+
 function startGame2() {
     if (interval) {
         clearInterval(interval);  
@@ -190,7 +203,7 @@ function startGame2() {
     snake = [{ x: 10, y: 10 }];
     direction = { x: 1, y: 0 };
     interval = setInterval(updateGame2, 100);
-    genFood();
+    genFood2();
     genShit();
 };
 
@@ -232,7 +245,7 @@ function updateGame2() {
     }
     snake.unshift(snakeHead);
     if (snakeHead.x === food.x && snakeHead.y === food.y) {
-        genFood();
+        genFood2();
         genShit();
         score++;
         scoreElement.textContent = score;

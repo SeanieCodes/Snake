@@ -78,15 +78,15 @@ body {
 
 #message1 {
     font-size: 24px;
-    color: #046c1a;
+    color: #03ab03;
     text-align: center;
     margin: 10px 0;
     min-height: 36px;
 }
 
 #message2 {
-    font-size: 24px;
-    color: rgb(39, 24, 24);
+    font-size: 300px;
+    color: rgb(63, 41, 41);
     text-align: center;
     margin: 10px 0;
     min-height: 36px;
