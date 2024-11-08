@@ -252,7 +252,7 @@ function updateGame2() {
         snakeHead.x < 0 || snakeHead.x >= gridSize || 
         snakeHead.y < 0 || snakeHead.y >= gridSize || 
         snake.some(segment => segment.x === snakeHead.x && segment.y === snakeHead.y) || 
-        shits.some(p => p.x === snakeHead.x && p.y === snakeHead.y)
+        shits.some(shitty => shitty.x === snakeHead.x && shitty.y === snakeHead.y)
     ) {
         gameOver();
         return;
