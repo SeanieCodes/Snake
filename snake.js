@@ -202,7 +202,7 @@ function genShit() {
             y: Math.floor(Math.random() * gridSize)
         };
     } while (snake.some(segment => segment.x === shit.x && segment.y === shit.y) || 
-             shits.some(p => p.x === shit.x && p.y === shit.y) || 
+             shits.some(shitty => shitty.x === shit.x && shitty.y === shit.y) || 
              (food.x === shit.x && food.y === shit.y));
     shits.push(shit);
 };
