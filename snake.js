@@ -84,7 +84,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 function gameWin1() {
-    message1.textContent = 'YAY!';
+    message1.textContent = 'Yay!';
     gameRunning = false;
     clearInterval(interval);
 };
@@ -158,13 +158,13 @@ function updateGame1() {
 };
 
 function gameWin2() {
-    message2.textContent = 'ur the shit!!!';
+    message2.textContent = 'Yay!';
     gameRunning = false;
     clearInterval(interval);
 };
 
 function gameOver2() {
-    message2.textContent = 'SHIT!!!!!!';
+    message2.textContent = 'SHIT!!!!!!!';
     gameRunning = false;
     clearInterval(interval);
 };
