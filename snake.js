@@ -230,12 +230,12 @@ function updateGame2() {
     foodElement.style.gridColumnStart = food.x + 1;
     gameBoard.appendChild(foodElement);
     shits.forEach(shit => {
-    const shitElement = document.createElement('div');
-    shitElement.classList.add('shit');
-    shitElement.textContent = '💩';
-    shitElement.style.gridRowStart = shit.y + 1;
-    shitElement.style.gridColumnStart = shit.x + 1;
-    gameBoard.appendChild(shitElement);
+        const shitElement = document.createElement('div');
+        shitElement.classList.add('shit');
+        shitElement.textContent = '💩';
+        shitElement.style.gridRowStart = shit.y + 1;
+        shitElement.style.gridColumnStart = shit.x + 1;
+        gameBoard.appendChild(shitElement);
     });
     snake.forEach(segment => {
         const snakeElement = document.createElement('div');
