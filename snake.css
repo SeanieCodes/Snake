@@ -53,10 +53,11 @@ body {
     border-radius: 50%;
 }
 
-.pixel {
-    background-color: green;
-    border: 1px solid #f1f5f6;
-    border-radius: 50%;
+.shit {
+    font-size: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button {
