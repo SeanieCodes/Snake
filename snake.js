@@ -39,6 +39,7 @@ Player can click the Play Again button to return to the Start screen after the g
 
 let snake;
 let food;
+let pixel;
 let direction;
 let interval;
 let gameRunning;
@@ -75,13 +76,6 @@ button2.addEventListener('click', () => {
     startGame2();
 });
 
-button3.addEventListener('click', () => {
-    levelScreen.style.display = 'none';
-    gameContainer.style.display = 'flex';
-    playAgainButton.style.display = 'block';
-    startGame3();
-});
-
 playAgainButton.addEventListener('click', () => {
     playAgainButton.style.display = 'none';
     gameContainer.style.display = 'none';
@@ -91,45 +85,6 @@ playAgainButton.addEventListener('click', () => {
     score = 0;
     gameRunning = false;
 })
-
-function startGame1() {
-    if (interval) {
-        clearInterval(interval);  
-      };
-    
-    gameBoard.innerHTML = '';
-    gameRunning = true;
-    snake = [{ x: 10, y: 10 }];
-    direction = { x: 1, y: 0 };
-    interval = setInterval(updateGame, 100);
-    genFood();
-};
-
-function startGame2() {
-    if (interval) {
-        clearInterval(interval);  
-      };
-    
-    gameBoard.innerHTML = '';
-    gameRunning = true;
-    snake = [{ x: 10, y: 10 }];
-    direction = { x: 1, y: 0 };
-    interval = setInterval(updateGame, 75);
-    genFood();
-};
-
-function startGame3() {
-    if (interval) {
-        clearInterval(interval);  
-      };
-    
-    gameBoard.innerHTML = '';
-    gameRunning = true;
-    snake = [{ x: 10, y: 10 }];
-    direction = { x: 1, y: 0 };
-    interval = setInterval(updateGame, 50);
-    genFood();
-};
 
 function genFood() {
     food = {
@@ -144,7 +99,53 @@ function genFood() {
     };
 };
 
-function updateGame() {
+function genPixel() {
+    pixel = {
+        x: Math.floor(Math.random() * gridSize),
+        y: Math.floor(Math.random() * gridSize)
+    };
+    while (snake.some(segment => segment.x === pixel.x && segment.y === pixel.y)) {
+        pixel = {
+            x: Math.floor(Math.random() * gridSize),
+            y: Math.floor(Math.random() * gridSize)
+        };
+    };
+    while (food.x === pixel.x && food.y === pixel.y) {
+        pixel = {
+            x: Math.floor(Math.random() * gridSize),
+            y: Math.floor(Math.random() * gridSize)
+        };
+    };
+};
+
+function startGame1() {
+    if (interval) {
+        clearInterval(interval);  
+      };
+    
+    gameBoard.innerHTML = '';
+    gameRunning = true;
+    snake = [{ x: 10, y: 10 }];
+    direction = { x: 1, y: 0 };
+    interval = setInterval(updateGame1, 100);
+    genFood();
+};
+
+function startGame2() {
+    if (interval) {
+        clearInterval(interval);  
+      };
+    
+    gameBoard.innerHTML = '';
+    gameRunning = true;
+    snake = [{ x: 10, y: 10 }];
+    direction = { x: 1, y: 0 };
+    interval = setInterval(updateGame2, 100);
+    genFood();
+    genPixel();
+};
+
+function updateGame1() {
     if (!gameRunning) return;
     gameBoard.innerHTML = '';
     const foodElement = document.createElement('div');
@@ -177,6 +178,50 @@ function updateGame() {
         snake.pop();
     };
     if (score === 10) {
+        gameWin();
+        return;
+    };
+};
+
+function updateGame2() {
+    if (!gameRunning) return;
+    gameBoard.innerHTML = '';
+    const foodElement = document.createElement('div');
+    foodElement.classList.add('food');
+    foodElement.style.gridRowStart = food.y + 1;
+    foodElement.style.gridColumnStart = food.x + 1;
+    gameBoard.appendChild(foodElement);
+    const pixelElement = document.createElement('div');
+    pixelElement.classList.add('pixel');
+    pixelElement.style.gridRowStart = pixel.y + 1;
+    pixelElement.style.gridColumnStart = pixel.x + 1;
+    gameBoard.appendChild(pixelElement);
+    snake.forEach(segment => {
+        const snakeElement = document.createElement('div');
+        snakeElement.classList.add('snake');
+        snakeElement.style.gridRowStart = segment.y + 1;
+        snakeElement.style.gridColumnStart = segment.x + 1;
+        gameBoard.appendChild(snakeElement);
+    });
+    const newHead = {
+        x: snake[0].x + direction.x,
+        y: snake[0].y + direction.y
+    };
+    if (newHead.x < 0 || newHead.x >= gridSize || newHead.y < 0 || newHead.y >= gridSize || (newHead.x === pixel.x && newHead.y === pixel.y) || snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)) {
+        gameOver();
+        return;
+    };
+
+    snake.unshift(newHead);
+    if (newHead.x === food.x && newHead.y === food.y) {
+        genFood();
+        genPixel();
+        score++;
+        scoreElement.textContent = score;
+    } else {
+        snake.pop();
+    };
+    if (score === 20) {
         gameWin();
         return;
     };

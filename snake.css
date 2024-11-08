@@ -51,6 +51,12 @@ body {
     border-radius: 50%;
 }
 
+.pixel {
+    background-color: green;
+    border: 1px solid #f1f5f6;
+    border-radius: 50%;
+}
+
 .button {
     padding: 10px 30px;
     background-color: #ff6347;
