@@ -172,17 +172,17 @@ function updateGame1() {
         snakeElement.style.gridColumnStart = segment.x + 1;
         gameBoard.appendChild(snakeElement);
     });
-    const newHead = {
+    const snakeHead = {
         x: snake[0].x + direction.x,
         y: snake[0].y + direction.y
     };
-    if (newHead.x < 0 || newHead.x >= gridSize || newHead.y < 0 || newHead.y >= gridSize || snake.some(segment => segment.x === newHead.x && segment.y === newHead.y)) {
+    if (snakeHead.x < 0 || snakeHead.x >= gridSize || snakeHead.y < 0 || snakeHead.y >= gridSize || snake.some(segment => segment.x === snakeHead.x && segment.y === snakeHead.y)) {
         gameOver();
         return;
     };
 
-    snake.unshift(newHead);
-    if (newHead.x === food.x && newHead.y === food.y) {
+    snake.unshift(snakeHead);
+    if (snakeHead.x === food.x && snakeHead.y === food.y) {
         genFood();
         score++;
         scoreElement.textContent = score;
@@ -244,22 +244,22 @@ function updateGame2() {
         snakeElement.style.gridColumnStart = segment.x + 1;
         gameBoard.appendChild(snakeElement);
     });
-    const newHead = {
+    const snakeHead = {
         x: snake[0].x + direction.x,
         y: snake[0].y + direction.y
     };
     if (
-        newHead.x < 0 || newHead.x >= gridSize || 
-        newHead.y < 0 || newHead.y >= gridSize || 
-        snake.some(segment => segment.x === newHead.x && segment.y === newHead.y) || 
-        pixels.some(p => p.x === newHead.x && p.y === newHead.y)  // Check pixel collision
+        snakeHead.x < 0 || snakeHead.x >= gridSize || 
+        snakeHead.y < 0 || snakeHead.y >= gridSize || 
+        snake.some(segment => segment.x === snakeHead.x && segment.y === snakeHead.y) || 
+        pixels.some(p => p.x === snakeHead.x && p.y === snakeHead.y)
     ) {
         gameOver();
         return;
     }
 
-    snake.unshift(newHead);
-    if (newHead.x === food.x && newHead.y === food.y) {
+    snake.unshift(snakeHead);
+    if (snakeHead.x === food.x && snakeHead.y === food.y) {
         genFood();
         genPixel();
         score++;
