@@ -86,8 +86,14 @@ function gameWin() {
     clearInterval(interval);
 };
 
-function gameOver() {
+function gameOver1() {
     message.textContent = 'Play Again!';
+    gameRunning = false;
+    clearInterval(interval);
+};
+
+function gameOver2() {
+    message.textContent = 'SHIT!!!!!!!';
     gameRunning = false;
     clearInterval(interval);
 };
@@ -137,7 +143,7 @@ function updateGame1() {
         y: snake[0].y + direction.y
     };
     if (snakeHead.x < 0 || snakeHead.x >= gridSize || snakeHead.y < 0 || snakeHead.y >= gridSize || snake.some(segment => segment.x === snakeHead.x && segment.y === snakeHead.y)) {
-        gameOver();
+        gameOver1();
         return;
     };
     snake.unshift(snakeHead);
@@ -213,7 +219,7 @@ function updateGame2() {
         snake.some(segment => segment.x === snakeHead.x && segment.y === snakeHead.y) || 
         shits.some(shitty => shitty.x === snakeHead.x && shitty.y === snakeHead.y)
     ) {
-        gameOver();
+        gameOver2();
         return;
     }
     snake.unshift(snakeHead);
