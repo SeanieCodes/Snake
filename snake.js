@@ -52,7 +52,7 @@ playAgainButton.addEventListener('click', () => {
     direction = { x: 1, y: 0 };
     clearInterval(interval);
     gameRunning = false;
-})
+});
 
 document.addEventListener('keydown', (event) => {
     switch(event.key) {
