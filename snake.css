@@ -76,9 +76,17 @@ body {
     background-color: #ff4500;
 }
 
-#message {
+#message1 {
     font-size: 24px;
-    color: #32cd32;
+    color: #046c1a;
+    text-align: center;
+    margin: 10px 0;
+    min-height: 36px;
+}
+
+#message2 {
+    font-size: 24px;
+    color: rgb(39, 24, 24);
     text-align: center;
     margin: 10px 0;
     min-height: 36px;

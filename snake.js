@@ -13,7 +13,8 @@ const button2 = document.getElementById('button2');
 const gameContainer = document.getElementById('gameContainer');
 const playAgainButton = document.getElementById('playAgainButton');
 const gameBoard = document.getElementById('gameBoard');
-const message = document.getElementById('message');
+const message1 = document.getElementById('message1');
+const message2 = document.getElementById('message2');
 const scoreElement = document.getElementById('score');
 const gridSize = 20;
 
@@ -40,7 +41,8 @@ playAgainButton.addEventListener('click', () => {
     playAgainButton.style.display = 'none';
     gameContainer.style.display = 'none';
     startScreen.style.display = 'flex';
-    message.textContent = '';
+    message1.textContent = '';
+    message2.textContent = '';
     scoreElement.textContent = '';
     score = 0;
     shits = [];
@@ -80,20 +82,26 @@ document.addEventListener('keydown', (event) => {
     };
 });
 
-function gameWin() {
-    message.textContent = 'YAY!';
+function gameWin1() {
+    message1.textContent = 'YAY!';
+    gameRunning = false;
+    clearInterval(interval);
+};
+
+function gameWin2() {
+    message2.textContent = 'YAY!';
     gameRunning = false;
     clearInterval(interval);
 };
 
 function gameOver1() {
-    message.textContent = 'Play Again!';
+    message1.textContent = 'Play Again!';
     gameRunning = false;
     clearInterval(interval);
 };
 
 function gameOver2() {
-    message.textContent = 'SHIT!!!!!!!';
+    message2.textContent = 'SHIT!!!!!!!';
     gameRunning = false;
     clearInterval(interval);
 };
@@ -155,7 +163,7 @@ function updateGame1() {
         snake.pop();
     };
     if (score === 10) {
-        gameWin();
+        gameWin1();
         return;
     };
 };
@@ -232,7 +240,7 @@ function updateGame2() {
         snake.pop();
     };
     if (score === 20) {
-        gameWin();
+        gameWin2();
         return;
     };
 };
