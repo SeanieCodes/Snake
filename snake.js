@@ -15,6 +15,7 @@ const playAgainButton = document.getElementById('playAgainButton');
 const gameBoard = document.getElementById('gameBoard');
 const message1 = document.getElementById('message1');
 const message2 = document.getElementById('message2');
+const scoreBoard = document.getElementById('scoreBoard');
 const scoreElement = document.getElementById('score');
 const gridSize = 20;
 
