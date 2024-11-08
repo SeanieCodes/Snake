@@ -45,15 +45,15 @@ let interval;
 let gameRunning;
 let score = 0;
 const startScreen = document.getElementById('startScreen');
+const startButton = document.getElementById('startButton');
 const levelScreen = document.getElementById('levelScreen');
 const button1 = document.getElementById('button1');
 const button2 = document.getElementById('button2');
-const startButton = document.getElementById('startButton');
 const playAgainButton = document.getElementById('playAgainButton');
+const gameContainer = document.getElementById('gameContainer');
 const gameBoard = document.getElementById('gameBoard');
 const message = document.getElementById('message');
 const scoreElement = document.getElementById('score');
-const gameContainer = document.getElementById('gameContainer');
 const gridSize = 20;
 
 startButton.addEventListener('click', () => {
