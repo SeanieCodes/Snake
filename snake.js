@@ -147,7 +147,7 @@ function updateGame1() {
     } else {
         snake.pop();
     };
-    if (score === 10) {
+    if (score === 5) {
         gameWin1();
         return;
     };

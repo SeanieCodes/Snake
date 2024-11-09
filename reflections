@@ -1,0 +1,19 @@
+/*
+
+reflections:
+
+good practice for many different JS methods
+learned new methods
+learned how to make code more concise
+
+difficulties:
+
+had to figure out how to keep the shit on the screen
+therefore had to learn how to use JS to prevent code from being affected by HTML-affecting code
+spent lots of time figuring out I had to clear the interval
+spent lots of time learning function syntax of new functions to apply to the code
+had to modify the do while loops quite a bit to make them as water-tight as possible
+had to learn the difference between calculation/game logic and actually putting things on the screen
+originally had 3 levels and tried different speeds but that was too complicated
+
+*/
